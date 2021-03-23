@@ -1,17 +1,14 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ""
-labels: 'feature'
-assignees: ''
+## Title of Feature
 
----
+| Name       | Topic | Title                                             | Labels          | Assignees   |
+|------------|-------|---------------------------------------------------|-----------------|-------------|
+| Feature    | Topic | Short description, or title of feature            | relevant labels | @you        |
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Description of feature
+> A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+### Required steps for implementation
+> A clear and concise description of what you want to happen.
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### Additional context
+> Add any other context or screenshots about the feature request here.
