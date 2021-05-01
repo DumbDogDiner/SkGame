@@ -1,3 +1,5 @@
+rootProject.name = "skgame"
+
 include("hologram")
 
 pluginManagement {

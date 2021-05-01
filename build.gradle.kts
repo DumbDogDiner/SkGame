@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.4.10"
+    id("maven-publish")
     id("com.diffplug.spotless") version "5.8.2"
     id("org.jetbrains.dokka") version "1.4.20"
 }
@@ -22,13 +23,24 @@ allprojects {
 subprojects {
     // apply plugins
     apply(plugin = "kotlin")
-    apply(plugin = "org.jetbrains.dokka")
+    apply(plugin = "maven-publish")
 
     // Spotless configuration
     apply(plugin =  "com.diffplug.spotless")
     spotless {
         ratchetFrom = "origin/master"
+        kotlin {
+            target(fileTree(".") {
+                include("**/*.kt")
+                exclude("**/.gradle/**")
+            })
+            // see https://github.com/shyiko/ktlint#standard-rules
+            ktlint().userData(mapOf("max_line_length" to "120", "insert_final_newline" to "true"))
+            licenseHeaderFile("${rootDir}/LICENSE_HEADER")
+        }
     }
+
+    apply(plugin = "org.jetbrains.dokka")
 
     // declare global dependencies
     dependencies {
@@ -42,6 +54,65 @@ subprojects {
         }
         compileKotlin {
             kotlinOptions.jvmTarget = JavaVersion.VERSION_14.toString()
+        }
+
+        create<Jar>("sources") {
+            archiveClassifier.set("sources")
+            from("sourceSets.main.allSource")
+        }
+    }
+
+    val sourcesJar by tasks.creating(Jar::class) {
+        archiveClassifier.set("sources")
+        from(sourceSets.getByName("main").allSource)
+    }
+
+    val dokkaJavadocJar by tasks.creating(Jar::class) {
+        dependsOn(tasks.dokkaJavadoc)
+        from(tasks.dokkaJavadoc.get().outputDirectory.get())
+        archiveClassifier.set("javadoc")
+    }
+
+    // define the publishing block
+    publishing {
+        repositories {
+            // github packages repository
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/DumbDogDiner/SkGame")
+                credentials {
+                    username = (extra["gpr.user"] ?: System.getenv("GITHUB_ACTOR")).toString()
+                    password = (extra["gpr.password"] ?: System.getenv("GITHUB_TOKEN")).toString()
+                }
+            }
+        }
+        // define the publication for github packages
+        publications {
+            register<MavenPublication>("gpr") {
+                artifactId = "${rootProject.name}-${project.name}"
+
+                from(components["java"])
+                // include the sources, and javadoc in the publication
+                artifact(sourcesJar)
+                artifact(dokkaJavadocJar)
+
+                // configure pom for the output
+                pom {
+                    scm {
+                        connection.set("scm:git:https://github.com/DumbDogDiner/SkGame.git")
+                        developerConnection.set("scm:git:https://github.com/DumbDogDiner/SkGame.git")
+                        url.set("https://github.com/DumbDogDiner/SkGame")
+                    }
+                    issueManagement {
+                        system.set("GitHub Issues")
+                        url.set("https://github.com/DumbDogDiner/SkGame/issues")
+                    }
+                    ciManagement {
+                        system.set("GitHub Actions")
+                        url.set("https://github.com/DumbDogDiner/SkGame/actions")
+                    }
+                }
+            }
         }
     }
 }
