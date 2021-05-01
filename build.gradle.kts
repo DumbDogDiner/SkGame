@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm") version "1.4.10"
     id("com.diffplug.spotless") version "5.8.2"
+    id("org.jetbrains.dokka") version "1.4.20"
 }
 
 allprojects {
@@ -22,9 +21,8 @@ allprojects {
 
 subprojects {
     // apply plugins
-    apply(plugin = "java")
     apply(plugin = "kotlin")
-    apply(plugin = "kr.entree.spigradle")
+    apply(plugin = "org.jetbrains.dokka")
 
     // Spotless configuration
     apply(plugin =  "com.diffplug.spotless")
