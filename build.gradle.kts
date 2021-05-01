@@ -81,8 +81,8 @@ subprojects {
                 name = "GitHubPackages"
                 url = uri("https://maven.pkg.github.com/DumbDogDiner/SkGame")
                 credentials {
-                    username = (extra["gpr.user"] ?: System.getenv("GITHUB_ACTOR")).toString()
-                    password = (extra["gpr.password"] ?: System.getenv("GITHUB_TOKEN")).toString()
+                    username = extra.properties.getOrDefault("gpr.user", System.getenv("GITHUB_ACTOR")).toString()
+                    password =  extra.properties.getOrDefault("gpr.user", System.getenv("GITHUB_ACTOR")).toString()
                 }
             }
         }

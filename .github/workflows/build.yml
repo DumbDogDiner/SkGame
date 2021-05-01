@@ -21,3 +21,19 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: adoptopenjdk/openjdk14:alpine-slim
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install git
+        run: apk add --no-cache git
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Check code with Spotless
+        run: ./gradlew spotlessCheck
