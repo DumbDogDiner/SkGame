@@ -3,10 +3,12 @@ plugins {
     id("maven-publish")
     id("com.diffplug.spotless") version "5.8.2"
     id("org.jetbrains.dokka") version "1.4.20"
+    id("io.freefair.lombok") version "5.3.3.3"
 }
 
 allprojects {
     version = "1.0.0"
+    group = "com.dumbdogdiner"
 
     // declare global repositories
     repositories {
@@ -24,6 +26,7 @@ subprojects {
     // apply plugins
     apply(plugin = "kotlin")
     apply(plugin = "maven-publish")
+    apply(plugin = "io.freefair.lombok")
 
     // Spotless configuration
     apply(plugin =  "com.diffplug.spotless")
@@ -44,7 +47,8 @@ subprojects {
 
     // declare global dependencies
     dependencies {
-        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+        implementation("org.projectlombok:lombok:1.18.18")
+	    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     }
 
     tasks {
@@ -82,7 +86,7 @@ subprojects {
                 url = uri("https://maven.pkg.github.com/DumbDogDiner/SkGame")
                 credentials {
                     username = extra.properties.getOrDefault("gpr.user", System.getenv("GITHUB_ACTOR")).toString()
-                    password =  extra.properties.getOrDefault("gpr.user", System.getenv("GITHUB_ACTOR")).toString()
+                    password =  extra.properties.getOrDefault("gpr.password", System.getenv("GITHUB_TOKEN")).toString()
                 }
             }
         }
