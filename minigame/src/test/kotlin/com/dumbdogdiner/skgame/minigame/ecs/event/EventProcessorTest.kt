@@ -1,7 +1,7 @@
 package com.dumbdogdiner.skgame.minigame.ecs.event
 
-import com.dumbdogdiner.skgame.minigame.ecs.Component
-import com.dumbdogdiner.skgame.minigame.ecs.Entity
+import com.dumbdogdiner.skgame.minigame.ecs.annotation.Component
+import com.dumbdogdiner.skgame.minigame.ecs.annotation.Entity
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -34,6 +34,9 @@ internal class EventProcessorTest {
 	fun testFireEvent() {
 		val entity = Participant()
 		val entityCreateEvent = EntityCreateEvent(entity)
+
+		entity.getComponents()
+
 		// register listener
 		val listener = object : Listener {
 			var participantDidFire = false
