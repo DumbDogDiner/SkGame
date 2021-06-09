@@ -9,8 +9,21 @@ Implements an entity-component-system engine for constructing minigames quickly.
 class Participant {}
 
 @Component
+class Score {
+    public int score;
+}
+
+@Component
 class WithPlayer {
-    public Player player;
+    public UUID uniqueId;
+    public Player getPlayer() { /* Get player from bukkit */ };
+}
+
+@Resource
+class GameState {
+    public int currentRound;
+    public int maxRounds;
+    public int maxPlayers;
 }
 
 @System
@@ -22,7 +35,7 @@ class WinConditionSystem {
         }
 
         if (e.component.score > 10) {
-        
+            // run some game winning code
         }
     }
 }
