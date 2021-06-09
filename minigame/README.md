@@ -29,7 +29,7 @@ class GameState {
 @System
 class WinConditionSystem {
     @EventListener
-    public void onComponentChange(e: ComponentChangeEvent<Score>) {
+    public void onComponentChange(ComponentChangeEvent<Score> score) {
         if (!(e.entity instanceof Participant)) {
             return;
         }
