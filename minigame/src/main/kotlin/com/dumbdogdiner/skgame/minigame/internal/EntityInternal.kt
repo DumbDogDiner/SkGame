@@ -4,23 +4,24 @@
  */
 package com.dumbdogdiner.skgame.minigame.internal
 
-import com.dumbdogdiner.skgame.minigame.ecs.annotation.Entity
-import com.dumbdogdiner.skgame.minigame.ecs.annotation.InvalidAnnotationException
+import com.dumbdogdiner.skgame.minigame.annotation.InvalidAnnotationException
 import kotlin.reflect.full.hasAnnotation
 
 /**
  * Represents an internal entity.
  */
-internal class EntityInternal(child: Any) {
+internal class EntityInternal(child: Any, vararg components: ComponentInternal) {
+    /**
+	 * A list of components attached to this entity.
+	 */
+    val components: List<ComponentInternal>
+
     init {
         // ensure annotation
         if (!child::class.hasAnnotation<Entity>()) {
             throw InvalidAnnotationException(child, Entity::class)
         }
+        // create components
+        this.components = components.asList()
     }
-
-    /**
-	 * A list of components attached to this entity.
-	 */
-    val components = listOf<ComponentInternal>()
 }

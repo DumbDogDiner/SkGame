@@ -4,11 +4,12 @@
  */
 package com.dumbdogdiner.skgame.minigame.event
 
-import kotlin.reflect.KClass
-
 /**
- * Represents an entity destroy event.
+ * A generic entity event.
  */
-class EntityDestroyEvent(override val components: List<Any>) : EntityEvent() {
-    override val parameterClasses = listOf<KClass<*>>()
+abstract class EntityEvent : Event {
+    /**
+	 * The components attached to this entity.
+	 */
+    abstract val components: List<Any>
 }

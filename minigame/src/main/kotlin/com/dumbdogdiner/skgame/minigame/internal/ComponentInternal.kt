@@ -4,8 +4,8 @@
  */
 package com.dumbdogdiner.skgame.minigame.internal
 
-import com.dumbdogdiner.skgame.minigame.ecs.annotation.Component
-import com.dumbdogdiner.skgame.minigame.ecs.annotation.InvalidAnnotationException
+import com.dumbdogdiner.skgame.minigame.annotation.Component
+import com.dumbdogdiner.skgame.minigame.annotation.InvalidAnnotationException
 import kotlin.reflect.full.hasAnnotation
 
 /**

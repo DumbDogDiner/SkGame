@@ -4,8 +4,7 @@
  */
 package com.dumbdogdiner.skgame.minigame.ecs.event
 
-import com.dumbdogdiner.skgame.minigame.ecs.annotation.Component
-import com.dumbdogdiner.skgame.minigame.ecs.annotation.Entity
+import com.dumbdogdiner.skgame.minigame.annotation.Component
 import com.dumbdogdiner.skgame.minigame.event.ComponentChangeEvent
 import com.dumbdogdiner.skgame.minigame.event.EntityCreateEvent
 import com.dumbdogdiner.skgame.minigame.event.EventListener
@@ -13,12 +12,6 @@ import com.dumbdogdiner.skgame.minigame.event.EventProcessor
 import com.dumbdogdiner.skgame.minigame.event.Listener
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-
-@Entity
-internal class Participant
-
-@Entity
-internal class NotParticipant
 
 @Component
 internal class ScoreComponent {
@@ -32,7 +25,7 @@ internal class EventProcessorTest {
     fun testAddListener() {
         val listener = object : Listener {
             @EventListener
-            fun onComponentChange(e: ComponentChangeEvent<ScoreComponent, Participant>) {
+            fun onComponentChange(e: ComponentChangeEvent<ScoreComponent>) {
             }
         }
         // register listener
@@ -41,10 +34,6 @@ internal class EventProcessorTest {
 
     @Test
     fun testFireEvent() {
-        val entity = Participant()
-        val entityCreateEvent = EntityCreateEvent(entity)
-
-        entity.getComponents()
 
         // register listener
         val listener = object : Listener {
@@ -52,12 +41,12 @@ internal class EventProcessorTest {
             var notParticipantDidFire = false
 
             @EventListener
-            fun onParticipantCreate(e: EntityCreateEvent<Participant>) {
+            fun onParticipantCreate(e: EntityCreateEvent) {
                 participantDidFire = true
             }
 
             @EventListener
-            fun onNotParticipantCreate(e: EntityCreateEvent<NotParticipant>) {
+            fun onNotParticipantCreate(e: EntityCreateEvent) {
                 notParticipantDidFire = false
             }
         }

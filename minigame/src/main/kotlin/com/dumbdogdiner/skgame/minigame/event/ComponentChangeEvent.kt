@@ -7,6 +7,6 @@ package com.dumbdogdiner.skgame.minigame.event
 /**
  * Represents a component change event.
  */
-class ComponentChangeEvent<C : Any, E : Any>(val component: C, val entity: E) : Event {
-    override val parameterClasses = listOf(component::class, entity::class)
+class ComponentChangeEvent<C : Any>(val component: C) : Event {
+    override val parameterClasses = listOf(component::class)
 }

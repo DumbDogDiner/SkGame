@@ -4,9 +4,11 @@
  */
 package com.dumbdogdiner.skgame.minigame.event
 
+import kotlin.reflect.KClass
+
 /**
  * Represents an entity creation event.
  */
-class EntityCreateEvent<T : Any>(val entity: T) : Event {
-    override val parameterClasses = listOf(entity::class)
+class EntityCreateEvent(override val components: List<Any>) : EntityEvent() {
+    override val parameterClasses = listOf<KClass<*>>()
 }
