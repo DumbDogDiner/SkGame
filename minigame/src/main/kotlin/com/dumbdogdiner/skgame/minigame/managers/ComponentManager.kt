@@ -4,4 +4,12 @@
  */
 package com.dumbdogdiner.skgame.minigame.managers
 
-internal class ComponentManager
+import com.dumbdogdiner.skgame.minigame.Game
+import com.dumbdogdiner.skgame.minigame.internal.ComponentInternal
+
+/**
+ * Manages components in the current game.
+ */
+internal class ComponentManager(internal val game: Game) {
+	internal val components = mutableListOf<ComponentInternal>()
+}

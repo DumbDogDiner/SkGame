@@ -4,25 +4,26 @@
  */
 package com.dumbdogdiner.skgame.minigame.managers
 
+import com.dumbdogdiner.skgame.minigame.Game
 import com.dumbdogdiner.skgame.minigame.internal.ComponentInternal
 import com.dumbdogdiner.skgame.minigame.internal.EntityInternal
 
 /**
  * Manages the creation of entities.
  */
-internal class EntityManager {
+internal class EntityManager(internal val game: Game) {
     /**
 	 * A list of entities
 	 */
-    private val entities = mutableMapOf<Any, EntityInternal>()
+    private val entities = mutableListOf<EntityInternal>()
 
     /**
 	 * Create a new entity.
 	 */
-    fun create(entity: Any, vararg components: Any): EntityManager {
-        this.entities[entity] = EntityInternal(
-            entity, components = components.map { ComponentInternal(it) }.toTypedArray()
-        )
+    fun create(vararg components: Any): EntityManager {
+        this.entities.add(EntityInternal(
+             components = components.map { ComponentInternal(it) }.toTypedArray()
+        ))
         return this
     }
 }
