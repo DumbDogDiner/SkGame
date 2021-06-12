@@ -11,5 +11,5 @@ import com.dumbdogdiner.skgame.minigame.internal.ComponentInternal
  * Manages components in the current game.
  */
 internal class ComponentManager(internal val game: Game) {
-	internal val components = mutableListOf<ComponentInternal>()
+    internal val components = mutableListOf<ComponentInternal>()
 }

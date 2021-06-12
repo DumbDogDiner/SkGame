@@ -5,8 +5,8 @@
 package com.dumbdogdiner.skgame.minigame.scheduler
 
 class Scheduler {
-	/**
+    /**
 	 * Schedule a task to run every n ticks.
 	 */
-	fun every(ticks: Int) {}
+    fun every(ticks: Int) {}
 }

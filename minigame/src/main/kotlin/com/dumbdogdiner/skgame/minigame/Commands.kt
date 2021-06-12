@@ -8,10 +8,10 @@ package com.dumbdogdiner.skgame.minigame
  * Class of commands.
  */
 class Commands(internal val game: Game) {
-	/**
+    /**
 	 * Create a new entity.
 	 */
-	fun createEntity(vararg components: List<Any>) {
-		game.entityManager.create(components)
-	}
+    fun createEntity(vararg components: List<Any>) {
+        game.entityManager.create(components)
+    }
 }

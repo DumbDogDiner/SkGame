@@ -22,7 +22,7 @@ internal class EntityManager(internal val game: Game) {
 	 */
     fun create(vararg components: Any): EntityManager {
         this.entities.add(EntityInternal(
-             components = components.map { ComponentInternal(it) }.toTypedArray()
+            components = components.map { ComponentInternal(it) }.toTypedArray()
         ))
         return this
     }

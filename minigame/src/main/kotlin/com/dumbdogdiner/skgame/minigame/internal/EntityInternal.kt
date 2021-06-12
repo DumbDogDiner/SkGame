@@ -4,9 +4,6 @@
  */
 package com.dumbdogdiner.skgame.minigame.internal
 
-import com.dumbdogdiner.skgame.minigame.annotation.InvalidAnnotationException
-import kotlin.reflect.full.hasAnnotation
-
 /**
  * Represents an internal entity.
  */
