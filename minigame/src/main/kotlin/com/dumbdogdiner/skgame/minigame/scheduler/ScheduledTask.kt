@@ -4,4 +4,13 @@
  */
 package com.dumbdogdiner.skgame.minigame.scheduler
 
-class ScheduledTask
+import com.dumbdogdiner.skgame.minigame.Commands
+
+/**
+ * Represents a scheduled task.
+ */
+class ScheduledTask(
+    val delay: Int,
+    val period: Int,
+    val cb: (cmds: Commands) -> Unit
+)

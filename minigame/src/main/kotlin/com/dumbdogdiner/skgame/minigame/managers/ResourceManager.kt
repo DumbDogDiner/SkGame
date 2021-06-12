@@ -11,6 +11,8 @@ import com.dumbdogdiner.skgame.minigame.internal.ResourceInternal
  * Manages internal resources.
  */
 internal class ResourceManager(internal val game: Game) {
+    // resource objects
     internal val resourceObjects = mutableListOf<Any>()
+    // internal resources
     internal val resources = mutableListOf<ResourceInternal>()
 }

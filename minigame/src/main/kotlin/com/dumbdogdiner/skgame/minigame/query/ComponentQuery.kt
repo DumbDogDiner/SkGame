@@ -5,9 +5,9 @@
 package com.dumbdogdiner.skgame.minigame.query
 
 import com.dumbdogdiner.skgame.minigame.Game
-import com.dumbdogdiner.skgame.minigame.internal.ComponentInternal
+import com.dumbdogdiner.skgame.minigame.annotation.Component
 
 /**
  * Look for a given component.
  */
-class ComponentQuery(val game: Game) : Query<ComponentInternal>(game.componentManager.components)
+class ComponentQuery(val game: Game) : Query<Component>(game.componentManager.components)

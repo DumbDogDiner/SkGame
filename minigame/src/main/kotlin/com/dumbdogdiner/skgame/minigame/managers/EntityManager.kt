@@ -5,7 +5,6 @@
 package com.dumbdogdiner.skgame.minigame.managers
 
 import com.dumbdogdiner.skgame.minigame.Game
-import com.dumbdogdiner.skgame.minigame.internal.ComponentInternal
 import com.dumbdogdiner.skgame.minigame.internal.EntityInternal
 
 /**
@@ -21,8 +20,13 @@ internal class EntityManager(internal val game: Game) {
 	 * Create a new entity.
 	 */
     fun create(vararg components: Any): EntityManager {
+        // register components
+        val internalComponents = components.map {
+            game.componentManager.registerComponent(it)
+        }
+        // create entity
         this.entities.add(EntityInternal(
-            components = components.map { ComponentInternal(it) }.toTypedArray()
+            components = internalComponents.toTypedArray()
         ))
         return this
     }
